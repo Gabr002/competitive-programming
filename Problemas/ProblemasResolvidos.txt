@@ -1,0 +1,179 @@
+Problemas Resolvidos:
+
+- Divisão da Nlogônia
+
+======================================================================
+
+#include <bits/stdc++.h>
+using namespace std;
+#define tam 10000
+
+int main(){
+    /* - 3 -> total de consultas
+       - 2 1 ->  Coordenada do ponto divisor (2 -> Ponto Leste, 1 -> Ponto Norte)
+
+    Três Consultas:
+    10 10 -> (x-> 10, ponto Leste, Y -> 10, Ponto Norte) ->  Printa (NE), Nordeste
+    -10 1 ->  (X-> -10, Ponto Oeste, Y -> 1, Ponto Divisor) -> Divisa
+    0 33 -> (X-> 0, Ponto Oeste, Y -> 1, Ponto Norte) -> Printa (NO), Noroeste
+
+
+         4 -> total de consultas
+        -1000 -1000 -> Coordenada do ponto divisor (-1000 -> Ponto Leste, -1000 -> Ponto Norte)
+
+    Quatro Consultas:
+    -1000 -1000 ->  (X-> -1000, Ponto Divisa, Y -> -1000, Ponta Divisa) -> Printa Divisa
+    0 0 -> (x-> 0, ponto Leste, Y -> 0, Ponto Norte) ->  Printa (NE), Nordeste 
+    -2000 -10000 -> (x-> -2000, ponto Oeste, Y -> -10000, Ponto Sul) ->  Printa (SO), Sudoeste 
+    -999 -1001 -> (x -> -999, ponto Oeste, Y -> 10, Ponto Sul) ->  Printa (SE), Sudeste 
+
+    0 -> Return 0;
+    */
+     long long int totIte, posN, posM;
+
+     while(cin >> totIte){
+          
+          cin >> posN >> posM;
+
+          int vetX[tam], vetY[tam];
+          
+          for(int i = 1; i <= totIte; i++){
+             
+             cin >> vetX[i] >> vetY[i];
+
+               if(vetX[i] == posN || vetY[i] == posM)
+                    cout << "divisa" << endl;
+               else if(vetX[i] > posN && vetY[i] > posM)
+                    cout << "NE" << endl;
+               else if(vetX[i] < posN && vetY[i] > posM)
+                    cout << "NO" << endl;
+               else if(vetX[i] > posN && vetY[i] < posM)
+                    cout << "SE" << endl;
+               else if(vetX[i] < posN && vetY[i] < posM)
+                    cout << "SO" << endl;
+          }
+     }
+}
+
+
+
+
+- Frequência de Números
+
+========================================================================
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int iteracoes, count = 0;
+    
+    cin >> iteracoes;
+    
+    int vet[iteracoes];
+
+
+    for(int i = 0; i < iteracoes; i++)
+        cin >> vet[i];
+    
+    for(int i = 0; i < iteracoes; i++){
+        for(int j = 0; j < iteracoes; j++){
+            if(vet[i] < vet[j]){
+                int aux;
+                aux = vet[i];
+                vet[i] = vet[j];
+                vet[j] = aux;
+            }
+        }
+    }
+
+    for(int i = 0; i < iteracoes; i++){
+        
+        for(int j = 0; j < iteracoes; j++){
+            
+            if(vet[i] == vet[j])
+                count++;
+
+        }
+        if(vet[i] != vet[i+1])
+            cout << vet[i] << " aparece " << count << " vez(es)" << endl;
+        
+        count = 0;
+    }
+}
+
+
+
+- O jogo Matemático de Paula
+
+=======================================================================
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+
+    int num, a = 0, b = 0, count = 1;
+    
+    cin >> num;
+    
+    while(num--){
+        string var;
+        count = 0;
+        cin >> var;
+        
+        for(int i = 48; i < 58; i++){
+            
+            if((int)var[0] == i)
+                a = count;
+            if((int)var[2] == i)
+                b = count;
+             
+            count++;
+        }
+
+        if(a == b)
+            cout << a*b << endl;
+        else if((int)var[1] < 91)
+            cout << (b-a) << endl;
+        else
+            cout << (a+b) << endl;
+    }
+}
+
+
+
+- Divisibilidade Por 3
+
+=======================================================================
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int count = 0, somaDosAlgarismos = 0, tam = 0;
+    string str;
+    
+    while(cin >> tam && cin >> str){
+        for(int i = 0; i <= tam - 1; i++){
+            
+            for(int j = 48; j < 58; j++){
+                
+                if((int)str[i] == j)
+                    somaDosAlgarismos += count;
+
+                count++;
+            }
+
+            count = 0;
+        }
+
+        if(somaDosAlgarismos  % 3 == 0)
+            cout << somaDosAlgarismos << " sim" << endl;
+        else
+            cout << somaDosAlgarismos << " nao" << endl;
+
+        somaDosAlgarismos = 0;
+    }
+}
