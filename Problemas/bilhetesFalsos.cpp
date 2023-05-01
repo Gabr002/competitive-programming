@@ -6,7 +6,7 @@ int main(){
     
     long long int N, M, count = 0, repetido = 0;
 
-    while(cin >> N >> M){
+    while((cin >> N >> M) && (N != 0 && M != 0)){
         int vetor[10000];
         set<int> num;
 
