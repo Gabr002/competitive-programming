@@ -1,0 +1,4 @@
+Tamanho de casas decimais são definidas em c++:
+
+/* cout.precision(2); // Total de casas para imprimir.
+cout.setf(ios::fixed) */
