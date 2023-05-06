@@ -12,7 +12,7 @@ Os problemas da Maratona de Programação SBC são conhecidos por serem desafiad
 
 Este repositório contém soluções para os problemas da Maratona de Programação SBC, desenvolvidas por programadores experientes e competidores da Maratona.
 
-As soluções estão organizadas por ano e etapa da competição, e cada pasta contém uma solução para cada problema daquela etapa. As soluções estão escritas em diversas linguagens de programação, incluindo C++, Java e Python.
+As soluções estão organizadas por ano e etapa da competição, e cada pasta contém uma solução para cada problema daquela etapa. As soluções estão escritas em linguagem C++.
 
 # Contribuindo
 
