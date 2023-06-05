@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -26,3 +27,6 @@ int main(){
         cout << i << " - " << vetor[i] << endl;
 
 }
+=======
+#include <bits/c
+>>>>>>> eee7bcdc7f986d14b33a999c9f0d4863450db0fb
