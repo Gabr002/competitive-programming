@@ -4,7 +4,7 @@ using namespace std;
 
 int Hanoi(int N){
 	if(N == 1) return 1;
-    return 2*Hanoi(N-1)+1;
+    return 2*Hanoi(N-1)+1;/* Busca pelo n-1 */
 }
 
 
