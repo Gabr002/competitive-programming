@@ -22,6 +22,26 @@ void insertInStarted(Node **lista, int num){
         printf("Erro Memory Allocated!\n");
 }
 
+// Procedure for insert in end.
+void insertInEnd(Node **list, int number){
+    Node *aux,*new = mallloc(sizeof(Node));
+
+    if(new){
+       new->value = number;
+       new->next = NULL;
+       // Is the first?
+       if(*list == NULL)
+            *list = new;
+        else{
+            aux = *list;
+            while(aux->next)
+                aux = aux->next;
+            aux->next = new;
+        }
+    }else
+        printf("Error: In to allocate Memory!\n");
+}
+
 int main(){
 
 }
