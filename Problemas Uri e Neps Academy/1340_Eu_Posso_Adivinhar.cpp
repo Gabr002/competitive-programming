@@ -4,6 +4,7 @@
 using namespace std;
 
 bool equal_pilha(list<int>& lista, stack<int>& tad) {
+    cout << "Pilha" << endl;
     while (!lista.empty() && !tad.empty()) {
         if (lista.back() != tad.top()) {
             return false;
@@ -15,9 +16,9 @@ bool equal_pilha(list<int>& lista, stack<int>& tad) {
 }
 
 bool equal_fila(list<int>& lista, queue<int>& tad){
+    cout << "Fila" << endl;
     while(!lista.empty() && !tad.empty()){
         if(lista.front() != tad.front()){
-            cout << "L = "<< lista.front() << " T = " << tad.front() << endl;
             return false;
         }
         lista.pop_front();
@@ -27,6 +28,7 @@ bool equal_fila(list<int>& lista, queue<int>& tad){
 }
 
 bool equal_fila_prio(list<int>& lista, priority_queue<int>& tad) {
+    cout << "FP" << endl;
     while (!lista.empty() && !tad.empty()) {
         if(lista.front() != tad.top()) {
             return false;
@@ -34,7 +36,7 @@ bool equal_fila_prio(list<int>& lista, priority_queue<int>& tad) {
         lista.pop_front();
         tad.pop();
     }
-    return lista.empty() && tad.empty();
+    return lista.empty();
 }
 
 int main(){
@@ -62,13 +64,26 @@ int main(){
 
         }
 
-        if(equal_pilha(lista_teste, pilha) == true && equal_fila_prio(lista_teste, priority_queue_) == true && equal_fila(lista_teste, fila) == true)
+        if(
+        (equal_pilha(lista_teste, pilha) && 
+        equal_fila_prio(lista_teste, priority_queue_) && 
+        equal_fila(lista_teste, fila)) || 
+
+        (equal_pilha(lista_teste, pilha) && 
+        equal_fila_prio(lista_teste, priority_queue_)) ||
+
+        (equal_pilha(lista_teste, pilha) && 
+        equal_fila(lista_teste, fila)) ||
+
+        (equal_fila(lista_teste, fila) &&
+        equal_fila_prio(lista_teste, priority_queue_))
+        )
             cout << "not sure" << endl;
-        else if(equal_fila(lista_teste, fila) == true)
+        else if(equal_fila(lista_teste, fila))
             cout << "queue" << endl;
-        else if(equal_pilha(lista_teste, pilha) == true)
+        else if(equal_pilha(lista_teste, pilha))
             cout << "stack" << endl;
-        else if(equal_fila_prio(lista_teste, priority_queue_) == true)
+        else if(equal_fila_prio(lista_teste, priority_queue_))
             cout << "priority queue" << endl;
         else
             cout << "impossible" << endl;
