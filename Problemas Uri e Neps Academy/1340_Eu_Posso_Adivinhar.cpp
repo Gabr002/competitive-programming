@@ -1,42 +1,11 @@
 #include <bits/stdc++.h>
 #include <queue>
 #include <stack>
+#include <vector>
 using namespace std;
 
-bool equal_pilha(list<int>& lista, stack<int>& tad) {
-    cout << "Pilha" << endl;
-    while (!lista.empty() && !tad.empty()) {
-        if (lista.back() != tad.top()) {
-            return false;
-        }
-        lista.pop_back();
-        tad.pop();
-    }
-    return lista.empty() && tad.empty();
-}
-
-bool equal_fila(list<int>& lista, queue<int>& tad){
-    cout << "Fila" << endl;
-    while(!lista.empty() && !tad.empty()){
-        if(lista.front() != tad.front()){
-            return false;
-        }
-        lista.pop_front();
-        tad.pop();
-    }
-    return lista.empty() && tad.empty();
-}
-
-bool equal_fila_prio(list<int>& lista, priority_queue<int>& tad) {
-    cout << "FP" << endl;
-    while (!lista.empty() && !tad.empty()) {
-        if(lista.front() != tad.top()) {
-            return false;
-        }
-        lista.pop_front();
-        tad.pop();
-    }
-    return lista.empty();
+bool test_stack(){
+    
 }
 
 int main(){
@@ -44,12 +13,15 @@ int main(){
     int num, opc, value;
 
     queue<int> fila;
-    list<int> lista_teste;
+    // list<int> lista_teste;
+    vector<int> aux;     
     stack<int> pilha;
     priority_queue<int> priority_queue_;   
     
 
     while(cin >> num){
+        if(num == 0)
+            break;
         
         for(int i = 0; i < num; i++){    
             cin >> opc >> value;
@@ -59,7 +31,7 @@ int main(){
                 pilha.push(value);
                 priority_queue_.push(value);
             }else if(opc == 2){
-                lista_teste.push_back(value);
+                // lista_teste.push_back(value);
             }   
 
         }
@@ -88,11 +60,52 @@ int main(){
         else
             cout << "impossible" << endl;
 
-        while(!priority_queue_.empty() && !fila.empty() && !pilha.empty()){
+        while(!priority_queue_.empty() && !fila.empty() && !pilha.empty() && !lista_teste.empty()){
             fila.pop();
             priority_queue_.pop();
             pilha.pop();
+            lista_teste.pop_front();
         }
 
     }
-} 
+}
+
+
+/* bool equal_pilha(list<int>& lista, stack<int>& tad) {
+    list<int> aux = lista;
+    stack<int> tad_teste = tad;
+    while (!aux.empty() && !tad_teste.empty()) {
+        if (aux.front() != tad_teste.top()){
+            return false;
+        }
+        aux.pop_front();
+        tad_teste.pop();
+    }
+    return aux.empty() && tad_teste.empty();
+}
+
+bool equal_fila(list<int>& lista, queue<int>& tad){
+    list<int> aux = lista;
+    queue<int> tad_teste = tad;
+    while(!aux.empty() && !tad_teste.empty()){
+        if(aux.front() != tad_teste.front()){
+            return false;
+        }
+        aux.pop_front();
+        tad_teste.pop();
+    }
+    return aux.empty() && tad_teste.empty();
+}
+
+bool equal_fila_prio(list<int>& lista, priority_queue<int>& tad) {
+    list<int> aux = lista;
+    priority_queue<int> tad_teste = tad;
+    while(!aux.empty() && !tad_teste.empty()){
+        if(aux.front() != tad_teste.top()){
+            return false;
+        }
+        aux.pop_front();
+        tad_teste.pop();
+    }
+    return aux.empty();
+} */
