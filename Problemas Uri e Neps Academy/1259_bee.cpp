@@ -3,14 +3,14 @@ using namespace std;
 
 int main(){
     multiset<int> pares, impares;
-    int n, value = 0;    
+    int n, target = 0;    
 
     cin >> n;
 
     for(int i = 0; i < n; i++){
-        cin >> value;
-        if(value%2==0) pares.insert(value);
-        else impares.insert(value);
+        cin >> target;
+        if(target%2==0) pares.insert(target);
+        else impares.insert(target);
     }
 
     for(auto it = pares.begin(); it != pares.end(); it++) cout << *it << endl;
