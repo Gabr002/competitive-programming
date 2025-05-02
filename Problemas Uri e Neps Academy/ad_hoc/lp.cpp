@@ -13,7 +13,7 @@ int main(){
     while(t--){
         scanf("%d%d", &m, &s);
 
-        for(int i = 0; i < m; i++){
+        for(int i = 0; i < m; i++){ // elementos que já tem no vetor
             int b;
             scanf("%d", &b);
             v.push_back(b);
