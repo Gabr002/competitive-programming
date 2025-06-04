@@ -11,7 +11,10 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
 int main(){ _
-    // function Sort
-    // Ordenando os elementos no range início até o fim. Se o range tem n elementos: O(nlog(n))     
+    // queue (pilha)
+    // Ver o elemento colocado mais tempo (.front()).
+    // Tirar o elemento colocado mais tempo (.pop()).
+    // Inserir um elemento (.push()).
+    
     return 0;
 }

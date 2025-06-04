@@ -11,7 +11,10 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
 int main(){ _
-    // function Sort
-    // Ordenando os elementos no range início até o fim. Se o range tem n elementos: O(nlog(n))     
+    map<int, char> m;
+    m[2] = 'b';
+    m[1] = 'a';
+
+    for(auto i : m) cout << i.f << " " << i.s << endl;   
     return 0;
 }
