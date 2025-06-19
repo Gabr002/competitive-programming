@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca Binária - Traduzido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        h1 {
+            color: #3B5998;
+            font-size: 2.6rem;
+            margin-top: 2rem;
+            font-family: Tahoma, Arial, Helvetica, sans-serif;
+        }
+        h2 {
+            font-size: 1.6rem;
+            color: #555;
+            margin-top: 1.5em;
+        }
+        p {
+            margin-bottom: 1em;
+        }
+        ol, ul {
+            margin-bottom: 1em;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 0.5em;
+        }
+        /* Estilos básicos para simular o layout de imagem, não conterão a imagem real */
+        .tex-graphics {
+            display: block;
+            margin: 1em auto;
+            max-width: 100%;
+            height: auto;
+            background-color: #f0f0f0; /* Cor de fundo para indicar a área da imagem */
+            text-align: center;
+            padding: 10px;
+            border: 1px dashed #ccc;
+        }
+        .tex-font-size-small {
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Busca Binária</h1>
+        <div class="content">
+            <p>Hoje aprenderemos uma das técnicas mais populares em programação competitiva — a busca binária.</p>
+
+            <h2>Buscando um item em um array</h2>
+            <p>Suponha que temos um array `a = [a1, a2, ..., an]`, ordenado em ordem não decrescente. Ou seja, a desigualdade `ai <= a(i + 1)` é satisfeita para os elementos vizinhos do array. Precisamos buscar rapidamente a posição do elemento `x` no array, ou seja, precisamos encontrar tal `i`, então `a[i] = x`.</p>
+            <p>Como faríamos para buscar a posição de `x`? Se você percorrer o array `a` da esquerda para a direita, isso funcionará em `O(n)` de tempo, o que é ineficaz para um array grande.</p>
+            <p>Como tornar isso mais rápido? Vamos aproveitar o fato de que o array `a` está ordenado. Se descobrimos que para algum `j` é verdade que `a[j] > x`, então a desigualdade será válida para todo `k > j`. Até que o array consista em um elemento, procederemos da seguinte forma:</p>
+            <ol>
+                <li>vamos olhar para o elemento que está no meio do array,</li>
+                <li>se for maior que `x`, então cortamos todos os elementos à direita dele; caso contrário, cortamos todos os elementos à esquerda dele.</li>
+            </ol>
+            <p>No final deste procedimento, teremos exatamente um elemento no array, que será igual a `x` ou não igual a `x`.</p>
+            <p>Por exemplo, para o array `a = [3, 5, 8, 13, 18, 19, 21, 27, 32]` e `x = 13`, o algoritmo será executado da seguinte forma:</p>
+            <div class="tex-graphics">Representação visual da busca binária: Segmento [1, 9], meio em a[5]=18.</div>
+            <p>Consideramos o segmento `[l, r] = [1, 9]`, o elemento do meio está na posição `(l + r)/2 = 5`.</p>
+            <div class="tex-graphics">Representação visual da busca binária: Segmento [1, 4], meio em a[3]=8.</div>
+            <p>Consideramos o segmento `[l, r] = [1, 4]`, o elemento do meio está na posição `(l + r)/2 = 3`.</p>
+            <div class="tex-graphics">Representação visual da busca binária: Segmento [3, 4], meio em a[4]=13.</div>
+            <p>Consideramos o segmento `[l, r] = [3, 4]`, o elemento do meio está na posição `(l + r)/2 = 4`.</p>
+            <p>Por que encontramos a posição do elemento `x` usando este método (se ele ocorrer no array)? Isso decorre do array ordenado. A cada passo do algoritmo, removemos da consideração a parte do array que contém elementos maiores ou menores que `x`.</p>
+            <p>Por que é mais rápido que uma busca linear? A cada passo do algoritmo, reduzimos o comprimento do segmento em consideração por `2` vezes, portanto, os passos do algoritmo serão feitos não mais que `log2 n`. Assim, obtivemos um algoritmo que roda em `O(log n)` de tempo.</p>
+
+            <h2>Encontre o mais próximo no array</h2>
+            <p>Vamos aprender a resolver o seguinte problema — em um array ordenado, você precisa encontrar rapidamente o elemento mais próximo do número `x` (`x` muda de consulta para consulta).</p>
+            <p>Se precisássemos encontrar um elemento exatamente igual a `x`, poderíamos usar uma tabela hash. Mas se não houver um elemento `x` no array, a tabela hash simplesmente indicará isso. Neste caso, precisamos resolver as duas tarefas seguintes:</p>
+            <ul>
+                <li>Encontrar o elemento máximo não maior que `x` (o mais próximo de `x` à esquerda)</li>
+                <li>Encontrar o elemento mínimo não menor que `x` (o mais próximo de `x` à direita)</li>
+            </ul>
+            <p>Escolhendo entre essas duas opções aquela que está mais próxima do número `x`, resolveremos o problema (já que todos os elementos à esquerda e à direita estarão apenas mais distantes de `x`).</p>
+            <p>Considere um algoritmo de busca binária para resolver o primeiro problema (elemento máximo não maior que `x`).</p>
+            <p>Nos é dado um array `a = [a0, a1, ..., a(n-1)]`. Vamos criar dois ponteiros `l` e `r`. Eles serão responsáveis pelos limites do segmento em consideração. Manteremos o invariante de que `a[l] <= x` e `a[r] > x`. Colocamos `l` em `-1` e `r` em `n`. Obviamente, o invariante é satisfeito.</p>
+            <p>Executaremos o seguinte algoritmo até `l + 1 < r` (até que os ponteiros convirjam):</p>
+            <ul>
+                <li>Seja `m` — o índice do ponto médio do segmento `[l, r]`;</li>
+                <li>Se `a[m] <= x` então colocamos `l = m`. Todos os elementos à esquerda de `m` são menores que `a[m]`;</li>
+                <li>Se `a[m] > x` então colocamos `r = m`. Todos os elementos à direita de `m` são maiores que `a[m]`.</li>
+            </ul>
+            <p>Vamos pegar um exemplo `a = [3, 5, 10, 11, 13, 18, 25, 27, 31]`, `x = 20`.</p>
+            <div class="tex-graphics">Representação visual: Como <span class="tex-font-size-small">x=20</span> é maior que <span class="tex-font-size-small">a[m]=13</span>, então <span class="tex-font-size-small">l=m</span>.</div>
+            <div class="tex-graphics">Representação visual: Como <span class="tex-font-size-small">x=20</span> é menor que <span class="tex-font-size-small">a[m]=25</span>, então <span class="tex-font-size-small">r=m</span>.</div>
+            <div class="tex-graphics">Representação visual: Ponteiros convergiram.</div>
+            <p>Como o invariante é satisfeito, então `a[l] <= x`, e `a[r] > x`, neste caso, `l` é o máximo de tais índices, e `r` é o mínimo.</p>
+            <p>Resta apenas escolher entre os elementos `a[l]` e `a[r]` o que está mais próximo de `x`. Neste exemplo, é `18`.</p>
+            <p>O que acontece em casos especiais?</p>
+            <ul>
+                <li>Se todos os itens são maiores que `x`, então `l = -1`.</li>
+                <li>Se todos os itens são menores que `x`, então `r = n`.</li>
+            </ul>
+            <p>Mas como definimos esses elementos como `+/-infinito`, a correção do algoritmo não será violada.</p>
+        </div>
+    </div>
+</body>
+</html>
