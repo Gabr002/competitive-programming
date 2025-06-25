@@ -13,10 +13,6 @@ if [ ! -d "$DOC_DIR" ]; then
   mkdir -p "$DOC_DIR"
 fi
 
-# Clone do repositório
-echo "Clonando repositório para $DOC_DIR..."
-git clone https://github.com/Gabr002/competitive-programming.git "$DOC_DIR/competitive-programming"
-
 # Criação do alias mcpp no .bashrc
 echo "Configurando alias no ~/.bashrc..."
 ALIAS_CMD="alias mcpp='cp \"$DOC_DIR/competitive-programming/introductionprogramation/Estrutura de Dados/temp.cpp\" ./'"
@@ -27,7 +23,10 @@ else
   echo "Alias já estava presente no .bashrc."
 fi
 
-# Recarregar .bashrc
+# Recarregar .bashrc - Este 'source' afeta apenas o subshell do script.
+# Para que o alias funcione no seu terminal atual, você deve:
+# 1. Executar este script com 'source ./seu_script.sh' OU
+# 2. Fechar e reabrir seu terminal após a execução normal do script.
 source ~/.bashrc
 
 # Instalação do Vim
@@ -51,4 +50,3 @@ set smartindent
 EOF
 
 echo "✅ Instalação finalizada com sucesso!"
-
