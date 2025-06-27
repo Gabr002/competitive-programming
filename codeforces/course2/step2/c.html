@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Search para Answer - Traduzido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        h1 {
+            color: #3B5998;
+            font-size: 2.6rem;
+            margin-top: 2rem;
+            font-family: Tahoma, Arial, Helvetica, sans-serif;
+        }
+        h2 {
+            font-size: 1.6rem;
+            color: #555;
+            margin-top: 1.5em;
+        }
+        p {
+            margin-bottom: 1em;
+        }
+        ol, ul {
+            margin-bottom: 1em;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 0.5em;
+        }
+        .code-snippet {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Binary Search para Answer</h1>
+
+        <p>Vamos resolver o seguinte problema — todos os números são divididos em **good** e **bad**. Se `x` é **good**, então `x+1` também é **good**. Encontre o mínimo número **good**. Em problemas reais, isso significa que existe alguma **function** que determina se um número é **good** ou **bad**.</p>
+        <p>Vamos criar uma **function f**, que para o número `x` retornará `1` se `x` for um número **good**; caso contrário, `0`.</p>
+        <div class="code-snippet">
+            f(x) = { 1, se x é um número good
+                   { 0, caso contrário
+        </div>
+        <p>Vamos definir dois **pointers l e r** de modo que `l` aponte para um número **bad** e `r` para um **good**. Ou seja, `f(l) = 0` e `f(r) = 1`.</p>
+        <p>Se não houver tais números, então, como na última lição, criaremos um número fictício para o qual o invariante será cumprido.</p>
+        <p>Até que os **pointers l e r** apontem para números adjacentes, faremos o seguinte:</p>
+        <p>Defina `m` igual a `(l+r)/2`. Se `m` for um número **good**, substitua `r` por `m`; se `m` for um número **bad**, substitua `l` por `m`.</p>
+        <p>Este algoritmo também funciona com a complexidade de cálculo da **function f** por logaritmo da distância entre `r` e `l`, ou seja, para `O(T(f) * log(r-l))`, onde **T(f)** é a complexidade computacional da **function f**. A cada passo, calculamos o valor da **function f** no ponto `m`, e então deslocamos uma das fronteiras para o meio do segmento.</p>
+        <p>Vamos considerar a aplicação deste algoritmo para o seguinte problema:</p>
+        <p>Dados `n` retângulos idênticos de tamanho `a x b`. Você precisa encontrar um square de área mínima no qual todos os `n` retângulos possam ser colocados. Retângulos podem se tocar ao longo de um ponto ou lado, mas não podem se cruzar. Retângulos não podem ser girados.</p>
+        <p>Então `f(x) = 1` se todos os `n` retângulos podem ser colocados em um square com lado `x`. É fácil ver que a **function f** é monótona, já que se todos os retângulos podem ser colocados em um square com lado `x`, então eles também podem ser colocados em um square com lado `x+1`, já que o square tem se tornado maior.</p>
+        <p>Pode-se mostrar que uma das disposições ótimas de retângulos dentro de um square é a seguinte:</p>
+        <p>Para contar o número de retângulos que cabem no `x * x` square, multiplique o número de retângulos que cabem no primeiro lado — `floor(x/a)`, e o número de retângulos que cabem no segundo lado — `floor(x/b)`. A fórmula resultante é `floor(x/a) * floor(x/b)`.</p>
+        <p>É fácil ver que expressamos explicitamente a **function f**:</p>
+        <div class="code-snippet">
+            f(x) = { 1, se floor(x/a) * floor(x/b) >= n
+                   { 0, caso contrário
+        </div>
+        <p>Agora, para resolver o problema, resta fazer uma **Binary Search** por `x`. Este método permite resolver uma grande classe de problemas nos quais a **function f** é monótona.</p>
+
+        <h2>Rope Problem</h2>
+        <p>Vamos ver mais um problema — o **Rope Problem**. Temos `n` ropes, o length da i-ésima rope é `a[i]`. Queremos cut `k` pieces do mesmo length delas. De todos os cutting methods, você precisa escolher aquele em que o length dos cut pieces é máximo.</p>
+        <p>Para resolver este problema, vamos criar a seguinte **function** — `f(x)` = é possível cut out `k` pieces of length `x`? Esta **function** se comporta quase da mesma forma que no previous problem, mas há algumas differences.</p>
+
+        <p>Se pudermos cut pieces of length `x` e precisar ser cut into three pieces, então o answer para o problema é `1/3`.</p>
+        <p>Como resolver o second problem? Let's remember what **Binary Search** looked like before. We repeated o cycle até que `l` e `r` fossem adjacent numbers. Mas com real numbers, este trick não will work, since there are no neighboring real numbers.</p>
+        <p>Portanto, such tasks can be solved com certain accuracy (it is usually indicated in the conditions). It is necessary to continue o loop as long as the segment `[l,r]` tem um length maior que o required precision.</p>
+        <p>However, this algorithm also tem um problem, it can get stuck. This will happen se os numbers `l` e `r` forem adjacent no type **double**. Since **double** stores numbers not com arbitrary precision, but only a certain number of digits, then se os numbers `l` e `r` forem adjacent, then o middle entre eles não será found e it will be equal to either `l` or `r` e o algorithm will run infinitely. Este problem appears se o answer for large e a required precision for high enough.</p>
+        <p>A easiest way to deal with this is not to use um **while loop**, mas um **for loop** com um sufficiently large number of iterations (você precisa de at least `log(maxAns / eps)`, onde **maxAns** é o maximum possible answer, e **eps** é a required precision). Usually, você pode sempre usar `100` iterations e não think.</p>
+        <p>A **function f(x)** itself should simply go through all ropes, divide their lengths por `x`, e round o resulting number down. That is how many pieces of length `x` we can cut. Se a sum of all these numbers não for less than `k`, then you need to return `1`; otherwise, `0`. It should be noted that a **function f** não é fast. Ela gasta `O(n)` operations, onde `n` é o length do array. A complexity total será `O(n * log(1/eps))`.</p>
+        <p>Se `f(m)=1`; Otherwise, `f(m)=0`, then we can cut pieces of smaller size (since they need less length). That is, in **Binary Search**, you need to swap zeros and ones in order to transform a **function** para o general algorithm.</p>
+        <p>A **function** agora accepts not integer values, but real ones. Sometimes it is beneficial to cut off pieces of non-integer size (por exemplo, se houver apenas uma rope of length `1`).</p>
+    </div>
+</body>
+</html>
