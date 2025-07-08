@@ -20,15 +20,19 @@ int main(){ _
         vector<int> vi;
         int mx = s-r;
         
-        int resto = r%(n-1);
-        mod = r - resto;
-        int value = mod/(n-1);
+        mod = r%(n-1);
+        r -= mod;
+        int value = r/(n-1);
 
         for(int i = 0; i < n-1; i++) vi.pb(value);
 
-        for(int i = 0; i < resto; i++){
-            vi[i] = min(6, resto+v[i]);
-        }
+        for(int i = 0; i < mod; i++) vi[i] = min(mx, vi[i]+1);
+
+        vi.pb(mx);
+
+        for(auto& i : vi) cout << i << " ";
+        cout << endl;
+
         vi.clear();
     }
     return 0;
