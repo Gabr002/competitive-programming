@@ -15,42 +15,20 @@ int main(){ _
     int t; cin >> t;
 
     while(t--){
-        int x = 0, n, s, r, y = 0, mod = 0; cin >> n >> s >> r;
+        int n, s, r, mod = 0; cin >> n >> s >> r;
         
         vector<int> vi;
         int mx = s-r;
         
-        if(r%(n-1) == 0){
-            int value = r/(n-1);
-            for(int i = 0; i < (n-1); i++) vi.pb(value);
+        int resto = r%(n-1);
+        mod = r - resto;
+        int value = mod/(n-1);
 
-            vi.pb(mx);
-            
-            for(auto& i : vi) cout << i << " ";
-            cout << endl;
-        }else{
-            int mod = r%(n-1);
-            mod = r - mod;
-            int value = mod/(n-1);
+        for(int i = 0; i < n-1; i++) vi.pb(value);
 
-            for(int i = 0; i < (n-1); i++) vi.pb(value);
-           
-            for(int i = 0; i < mod; i++){
-                if(mod + vi[i] > mx){
-                    vi[i] = ;
-                }else{ 
-                    mod = mod - mx + vi[i];
-                    vi[i] += mod; 
-                    mod--;
-                }
-            }
-            
-            vi.pb(mx);
-
-            for(auto& i : vi) cout << i << " ";
-            cout << endl;
+        for(int i = 0; i < resto; i++){
+            vi[i] = min(6, resto+v[i]);
         }
-
         vi.clear();
     }
     return 0;
