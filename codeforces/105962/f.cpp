@@ -11,6 +11,6 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
 int main(){ _
-    cout << 22%4 << endl;
+    
     return 0;
 }

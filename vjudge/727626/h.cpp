@@ -10,7 +10,9 @@ typedef long long ll;
 const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
+    // for all inputs and outputs
+
 int main(){ _
-    cout << 22%4 << endl;
+    
     return 0;
 }

@@ -15,27 +15,42 @@ int main(){ _
     int t; cin >> t;
 
     while(t--){
-        int x = 0, n, s, r, y = 0; cin >> n >> s >> r;
+        int x = 0, n, s, r, y = 0, mod = 0; cin >> n >> s >> r;
         
         vector<int> vi;
-        x = s-r;  
-        r -= x;
-        n--;
-        vi.pb(x);
-
-        while(n){
-            y = r - x; 
-            if(y < n) x--;
-            else{
-                vi.pb(x);
-                n--;
-                r-=x;
-            }
-        }
-        for(int i = 0; i < vi.size(); i++) cout << vi[i] << " ";
-        cout << endl;
+        int mx = s-r;
         
-        x = 0; n = 0, s = 0, r= 0, y = 0;
+        if(r%(n-1) == 0){
+            int value = r/(n-1);
+            for(int i = 0; i < (n-1); i++) vi.pb(value);
+
+            vi.pb(mx);
+            
+            for(auto& i : vi) cout << i << " ";
+            cout << endl;
+        }else{
+            int mod = r%(n-1);
+            mod = r - mod;
+            int value = mod/(n-1);
+
+            for(int i = 0; i < (n-1); i++) vi.pb(value);
+           
+            for(int i = 0; i < mod; i++){
+                if(mod + vi[i] > mx){
+                    vi[i] = ;
+                }else{ 
+                    mod = mod - mx + vi[i];
+                    vi[i] += mod; 
+                    mod--;
+                }
+            }
+            
+            vi.pb(mx);
+
+            for(auto& i : vi) cout << i << " ";
+            cout << endl;
+        }
+
         vi.clear();
     }
     return 0;
