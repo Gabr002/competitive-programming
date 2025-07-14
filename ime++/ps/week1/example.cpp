@@ -11,18 +11,16 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
 int main(){ _
-    int n; cin >> n;
-    set<int> si;
-    
-    for(int i = 0; i < n; i++){
-        int x; cin >> x;
-        si.insert(x);
+    ll n, w, h; cin >> w >> h >> n;
+    // condicao x/a*x/b < n
+    ll l = 0, r = 1;
+    while((r/w)*(r/h) < n) r *= 2;
+    while(l < r){
+        ll m = (l+r)/2;
+        if((m/w)*(m/h) < n) l = m + 1;
+        else r = m;
     }
 
-    auto it = next(si.begin(), 1);
-
-    if (it != si.end()) cout << *it << endl;
-    else cout << "NO";
-
+    cout << l << endl;
     return 0;
 }
