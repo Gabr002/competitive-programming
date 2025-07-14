@@ -15,6 +15,11 @@ int main(){ _
     bool formou = false;
     int count = 0;
 
+    if(str.size() < 3){ 
+        cout << "NO" << endl;
+        return 0;
+    }
+
     for(int i = 0; i <= str.size(); i++){
         if(formou){
             if(word == "Danil") count++;
@@ -24,7 +29,7 @@ int main(){ _
             if(word == "Nikita") count++;
             formou = false;
             word.clear();
-            if(str[i] == '_') continue;
+            if(str[i] == '_' || str[i+1] >= 'A' && str[i+1] <= 'Z') continue;
             else{
                 word.push_back(str[i]);
                 continue;
@@ -36,7 +41,25 @@ int main(){ _
             formou = true;
             word.push_back(str[i]);
         }
-        else word.push_back(str[i]); 
+        else{ 
+            word.push_back(str[i]); 
+            if(word == "Danil"){ 
+                count++;
+                word.clear();
+            }if(word == "Olya"){ 
+                count++;
+                word.clear();
+            }if(word == "Slava"){ 
+                count++;
+                word.clear();
+            }if(word == "Ann"){ 
+                count++;
+                word.clear();
+            }if(word == "Nikita"){ 
+                count++;
+                word.clear();
+            }
+        }
     }
     
     if(count == 1) cout << "YES" << endl;
