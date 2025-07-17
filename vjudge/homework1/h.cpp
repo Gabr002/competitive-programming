@@ -10,31 +10,29 @@ typedef long long ll;
 const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
+vector<pair<int, int>> v;
+
+bool cmp(auto a, auto b){
+    return ((a > b) && (a.first > b.first) || (a.first == b.first && a.second < b.second));
+}
+
+
 int main(){ _
     int t; scanf("%d", &t);
 
     while(t--){
         int n, xi, yi; scanf("%d", &n);
-        vector<pair<int, int>> ordv(n); 
-        vector<int> cnt(n);
-
+        
         for(int i = 0; i < n; i++){
             scanf("%d%d", &xi, &yi);
-            cnt[xi]++;
-            ordv[i].second = yi;
+            v.push_back({xi, yi});
         }
 
-        int cur = 0;
+        sort(v.begin(), v.end(), cmp);
 
-        for(int i = 0; i < cnt.size(); i++){
-            while(cnt[i]){
-                ordv[cur].first = i;
-                cur++;
-                cnt[i]--;
-            }
+        for(int i = 0; i < n; i++){
+            printf("%d %d\n", v[i].first, v[i].second);
         }
-
-        for(int i = 0; i < n; i++) printf("%d %d\n", ordv[i].first, ordv[i].second);
     }
     return 0;
 }
