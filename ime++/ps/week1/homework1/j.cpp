@@ -19,27 +19,27 @@ int main(){ _
         if(a == b){
             cout << "YES\n";
             cout << a << "\n";
-        }else if(a.size() == b.size()){
-            if(a[0] == b[0] && a[a.size()-1] == b[b.size()-1]){
-                cout << "YES\n";
-                cout << a[0] << '*' << b[b.size()-1] << "\n";
-            }else if(a[0] == b[0]){
-                cout << "YES\n";
-                cout << a[0] << '*' << "\n";
-            }else if(a[a.size()-1] == b[b.size()-1]){
-                cout << "YES\n";
-                cout << '*' << a[a.size()-1] << "\n"; 
-            }else{
-                _template.pb('*');
-                int cnt = 0;
-                for(int it = 0; i < a.size(); i++){
+        }
+        if(a[0] == b[0] && a[a.size()-1] == b[b.size()-1]){
+            cout << "YES\n";
+            cout << a[0] << '*' << b[b.size()-1] << "\n";
+        }else if(a[0] == b[0]){
+            cout << "YES\n";
+            cout << a[0] << '*' << "\n";
+        }else if(a[a.size()-1] == b[b.size()-1]){
+            cout << "YES\n";
+            cout << '*' << a[a.size()-1] << "\n"; 
+        }else{
+            _template.pb('*');
+            int cnt = 0;
+            for(int it = 0; i < max(a.size(), b.size()); i++){
+                if(a.size()>b.size()){
                     if(it < a.size()-1){
-                        if(a[it] == b[it] && a[it+1] == b[it+1]){
-                            _template.pb(a[it]);
-                            _template.pb(a[it+1]);
-                            _template.pb('*');
-                            break;
-                        }
+                        if(a[it] == b[at])
+                    }
+                }else{
+                    if(it < b.size()-1){
+                        if(b[it] == a[at])
                     }
                 }
             }
