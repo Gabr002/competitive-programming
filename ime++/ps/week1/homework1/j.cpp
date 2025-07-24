@@ -15,21 +15,34 @@ int main(){ _
    int t; cin >> t;
 
    while(t--){
-        string a, b, _template; cin >> a >> b;
+        string a, b; cin >> a >> b;
+        bool check = true;
 
         if(a == b){
-            
+            cout << "YES\n";
+            cout << a << "\n";
         }else if(a[0] == b[0]){
-
-        }else if(a[a.size()-1) == b[b.size()-1]){
-
+            cout << "YES\n"; 
+            cout << a[0] << "*" << "\n";
+        }else if(a[a.size()-1] == b[b.size()-1]){
+            cout << "YES\n";
+            cout << "*" << a[a.size()-1] << "\n";
         }else{
-            for(int i = 0; i < min(); i++){
-                for(int j = 0; j < min(); j++){
-                   // Ver o que os codigos de marcario antes... 
+            for(int i = 0; i < a.size(); i++){
+                for(int j = 0; j < b.size(); j++){
+                    if(i < a.size()-1 && j < b.size()-1){
+                        if(a[i] == b[j] && a[i+1] == b[j+1]){ 
+                            cout << "YES\n";
+                            cout << "*" << a[i] << a[i+1] << "*\n";
+                            check = false;
+                            break;
+                        }
+                    }
                 }
             }
+            if(check) cout << "NO\n";
         }
-   }
-   return 0;
-}
+    }
+    return 0;   
+} 
+
