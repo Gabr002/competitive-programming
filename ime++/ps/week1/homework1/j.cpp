@@ -31,11 +31,12 @@ int main(){ _
             for(int i = 0; i < a.size(); i++){
                 for(int j = 0; j < b.size(); j++){
                     if(i < a.size()-1 && j < b.size()-1){
-                        if(a[i] == b[j] && a[i+1] == b[j+1]){ 
+                        if(a[i] == b[j] && a[i+1] == b[j+1]){
                             cout << "YES\n";
                             cout << "*" << a[i] << a[i+1] << "*\n";
                             check = false;
-                            break;
+                            i = a.size();
+                            j = b.size();
                         }
                     }
                 }
