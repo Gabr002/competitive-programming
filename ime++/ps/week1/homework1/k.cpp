@@ -11,47 +11,60 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
 int main(){ _
-    int t, _begin = 0, _end = 0; cin >> t;
-    bool check = false, check_begin = true, check_end = false, check_erase = false;
-    string _template, str_guardada;
-
-    while(t--){
+    int t; cin >> t;
+    
+    if(t == 1){
         string str; cin >> str;
-        
-        if(!_template.empty()){
-            str_guardada = _template;
-            check = true;
-            for(int i = 0; i < _template.size(); i++){
-                for(int j = 0; j < str.size(); j++){
-                    if(str[j] == _template[i] && str[j+1] ==  _template[i+1] && check_begin){
-                        _begin = j;
-                        check_begin = false; // Até que encontre o check_end.
-                        check_end = true; // Até que ache o ultimo j+1;
-                        break; // Para ele percorrer o proximo
-                    }else if(str[j] == _template[i] && str[j+1] ==  _template[i+1] && check_end && str[j+2] !=  _template[i+2]){
-                        _end = j+1;
-                        check_begin = true; // Nova procura.
-                        check_end = false; // Até que ache o proximo begin;
-                        check_erase = true;
-                        i = 0;
-                        break;
-                    }else if(i == _template.size()-1 && str[j] == _template[i] && str[j-1] ==  _template[i-1]){
-                        _end = j;
-                        check_erase = true;
-                    }
-                }
-                if(check_erase){ 
-                    str.erase(_begin, _end-_begin+1);
-                    check_erase = false;
-                }
-            }
-            str_guardada += str;
-        }else{
-            _template = str;
-        }
+        cout << str.size() << "\n";
+        return 0;
     }
 
-    if(check) cout << str_guardada.size() << "\n";
-    else cout << _template.size() << "\n";
+    string a, b; cin >> a >> b;
+    int resp = a.size()+b.size();
+    
+    // Caso 3 - Uma string está contida em outra.
+    if(a.size() > b.size()) swap(a, b);
+    for(int i = 0; i <= b.size() - a.size(); i++){
+        string substring_b;
+
+        for(int j = i; j < i + a.size(); j++){
+            // cout << i << " " << j << "\n";
+            substring_b.push_back(b[j]);
+        }
+
+        if(substring_b == a) resp = min(resp, (int) b.size());
+    }
+
+    // Caso 2 - O sufixo do segundo e o prefixo do primeiro.
+    for(int i = 0; i < a.size(); i++){
+        string prefix_a;
+        for(int j = 0; j <= i; j++){
+            prefix_a.push_back(a[j]); 
+        }
+        
+        string suffix_b;
+        for(int j = b.size()-prefix_a.size(); j < b.size(); j++){
+            suffix_b.push_back(b[j]);
+        }
+        
+        if(prefix_a == suffix_b) resp = min(resp, (int) (a.size() + b.size() - suffix_b.size()));
+    }
+
+    // Caso 1 - O sufixo do primeiro e o prefixo do segundo;         
+    for(int i = 0; i < b.size(); i++){
+        string prefix_b;
+        for(int j = 0; j <= i; j++){
+            prefix_b.push_back(b[j]); 
+        }
+        
+        string suffix_a;
+        for(int j = a.size()-prefix_b.size(); j < a.size(); j++){
+            suffix_a.push_back(a[j]);
+        }
+        
+        if(prefix_b == suffix_a) resp = min(resp, (int)(b.size() + a.size() - suffix_a.size()));
+    }
+
+    cout << resp << "\n";
     return 0;
 }
