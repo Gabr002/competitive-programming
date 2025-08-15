@@ -13,7 +13,7 @@ const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 int main(){ _
     int t; cin >> t;
 
-    int mod = t/10;
+    int mod = t%10;
     cout << mod << "\n";
     return 0;
 }

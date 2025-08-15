@@ -22,25 +22,70 @@ const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 *           p: node index (NOT to confuse with the array index)                   *
 **********************************************************************************/
 
+const int N = 100010;
 
+// v -> array       st -> array seg tree
+ll st[4*N], v[N];
+
+// 
+void build (ll p, ll l, ll r) {
+    if (l == r) {
+        st[p] = v[l];
+        return;
+    }
+    build (2*p, l, (l+r)/2);
+    build (2*p+1, (l+r)/2+1, r);
+    st[p] = st[2*p]+st[2*p+1];
+    // st[p] = min(st[2*p], st[2*p+1]);
+    // st[p] = max(st[2*p], st[2*p+1]);
+}
+
+ll query (ll p, ll l, ll r, ll i, ll j) {
+    if (r < i or j < l) return 0;
+    // return INF;
+    // return -INF;
+    if (i <= l and r <= j) return st[p];
+    ll x = query(2*p, l, (l+r)/2, i, j);
+    ll y = query(2*p+1, (l+r)/2+1, r, i, j);
+    return x+y;
+    // return min(x, y);
+    // return max(x, y);
+}
+
+void update (ll p, ll l, ll r, ll x, ll v) {
+    if (x < l or r < x) return;
+    if (l == r and l == x) {
+        st[p] = v;
+        return;
+    }
+    update (2*p, l, (l+r)/2, x, v);
+    update (2*p+1, (l+r)/2+1, r, x, v);
+    st[p] = st[2*p] + st[2*p+1];
+    //st[p] = min(st[2*p], st[2*p+1]);
+    //st[p] = max(st[2*p], st[2*p+1]);
+}
 
 int main(){ _
     
-    int st[4*N], v[N];
-
-    int n, m; scanf(%d%d, &n, &m);
-
-    void build (int p, int l, int r) {
-        if (l == r) {
-            st[p] = v[l];
-            return;
-        }
-        build (2*p, l, (l+r)/2);
-        build (2*p+1, (l+r)/2+1, r);
-        st[p] = st[2*p]+st[2*p+1];
-        // st[p] = min(st[2*p], st[2*p+1]);
-        // st[p] = max(st[2*p], st[2*p+1]);
-    }    
+    ll n, m; scanf("%lld%lld", &n, &m);
     
+    for(ll i = 0; i < n; i++){
+        ll x; scanf("%lld", &x); 
+        v[i] = x;
+    }    
+
+    build(1, 0, n-1);
+
+    while(m--){
+        ll op; scanf("%lld", &op);
+        if(op == 1){
+            ll i, v; scanf("%lld%lld", &i, &v);
+            update(1, 0, n-1, i, v);
+        }
+        else{
+             ll l, r; scanf("%lld%lld", &l, &r);
+             printf("%lld\n", query(1, 0, n-1, l, r-1));
+        }
+    }
     return 0;
 }

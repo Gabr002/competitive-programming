@@ -10,6 +10,26 @@ typedef long long ll;
 const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
+/*
+
+prefixos
+l
+lo
+lov
+love
+lovel
+lovely
+
+sufixos
+y
+ly
+ely
+vely
+ovely
+lovely
+
+*/
+
 int main(){ _
     int t; cin >> t;
     
@@ -23,6 +43,7 @@ int main(){ _
     int resp = a.size()+b.size();
     
     // Caso 3 - Uma string está contida em outra.
+    // Bizuh 
     if(a.size() > b.size()) swap(a, b);
     for(int i = 0; i <= b.size() - a.size(); i++){
         string substring_b;
