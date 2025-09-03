@@ -12,10 +12,14 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
 int main(){ _
-    vector<pair<string, string>> vpii;
-    
-    vpii.push_back(make_pair("odiei", "IA, mas n a disciplina"));
+    int t; scanf("%d", &t);
 
-    cout << vpii[0].first << " " << vpii[0].second;
+    while(t--){
+        int a, b; scanf("%d%d", &a, &b);
+
+        if(a==b) printf("%d\n", 0);
+        else if((a > b && (a-b)%2 == 0) || (a < b && (a-b)%2 != 0)) printf("%d\n", 1);
+        else printf("%d\n", 2);
+    }
     return 0;
 }
