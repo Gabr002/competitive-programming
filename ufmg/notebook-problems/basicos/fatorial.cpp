@@ -10,9 +10,9 @@ typedef long long ll;
  
 const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
-const int MOD = 1e6+3;
- 
-vector<ll> v(MOD);
+const int MOD = 1e6;
+
+int v[MOD+5];
  
 ll fat(ll N){
     ll value = v[N];
@@ -30,7 +30,7 @@ int main(){ _
         v[i] = x;
     }
 
-    while(scanf("%lld", &n)){
+    while(scanf("%lld", &n) != EOF){
         printf("Instancia %lld\n", instancia++);
         printf("%lld\n", fat(n));
     }
