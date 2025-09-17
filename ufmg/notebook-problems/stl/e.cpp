@@ -12,6 +12,14 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
 int main(){ _
+    int t; cin >> t;
 
+    while(t--){
+        string a, b, c; cin >> a >> b >> c;
+        
+        if(a.size()!=b.size() || c.size()!=a.size() || c.size()!=b.size()){
+            
+        }
+    }
     return 0;
 }
